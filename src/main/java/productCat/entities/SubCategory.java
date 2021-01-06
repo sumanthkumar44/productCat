@@ -5,14 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="PROD_SUB_CATEGORY")
+@NamedQuery(name = "SubCategory.findAllSubCategoryByCatId",
+query = "SELECT c FROM SubCategory c where catCode=?1")
 public class SubCategory {
 	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="SUB_CAT_CODE")
+	 @GenericGenerator(name="subCatGen" , strategy="increment")
+	 @GeneratedValue(generator="subCatGen")
 	private Integer subCatCode;
 	 @Column(name="DESCRIPTION")
 	 private String description;

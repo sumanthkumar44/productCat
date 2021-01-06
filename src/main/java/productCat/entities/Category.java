@@ -7,11 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name ="PROD_CATEGORY")
 public class Category {
 	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @GenericGenerator(name="catGen" , strategy="increment")
+	 @GeneratedValue(generator="catGen")
 	 @Column(name ="CAT_CODE")
 	private Integer catCode;
 	 @Column(name ="DESCRIPTION") 
